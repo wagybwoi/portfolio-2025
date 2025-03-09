@@ -1,16 +1,21 @@
-import { useState } from "react";
+import React from "react";
 import { Canvas } from "@react-three/fiber";
-import "./App.css";
+import Scene from "./Scene";
+import Window from "./Window";
 
 function App() {
   return (
     <>
-      <main className="relative w-full h-full">
-        <div className="absolute w-full h-full top-0 left-0">
-          <Canvas gl={{ antialias: false, alpha: true }}>
-            {/* <Scene /> */}
-          </Canvas>
-        </div>
+      {/* Background */}
+      <div className="fullscreen">
+        <Canvas className="fullscreen" gl={{ antialias: false, alpha: true }}>
+          <Scene />
+        </Canvas>
+        <div className="fullscreen bg-[rgba(0,0,0,0.6)]"></div>
+      </div>
+      {/* Interface */}
+      <main className="fullscreen">
+        <Window theme="blue" inverted={false} />
       </main>
     </>
   );

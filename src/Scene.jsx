@@ -1,11 +1,11 @@
-import React, { useMemo, useRef } from "react";
-import Television from "./Television";
-import { useFrame, useThree } from "@react-three/fiber";
+import React, { useRef } from "react";
+import { useThree } from "@react-three/fiber";
 import {
   OrbitControls,
   OrthographicCamera,
   PerspectiveCamera,
   RenderTexture,
+  useTexture,
 } from "@react-three/drei";
 import {
   Color,
@@ -17,15 +17,19 @@ import {
   Vector3,
   WebGLRenderer,
 } from "three";
+import RadicalEffect from "./RadicalEffect.jsx";
 
 const Scene = () => {
   const { viewport, size, gl, canvas, camera } = useThree();
   const planeRef = useRef();
   const pCamRef = useRef();
+  const [noiseMap1, noiseMap2] = useTexture([
+    "seamless_colored_noise_1.png",
+    "seamless_colored_noise_2.jpg",
+  ]);
 
   return (
     <>
-      {/* <OrbitControls /> */}
       <OrthographicCamera
         makeDefault
         left={-size.width / 2}
@@ -34,34 +38,38 @@ const Scene = () => {
         bottom={-size.height / 2}
       />
       <mesh ref={planeRef} position={[0, 0, -2]}>
-        {/* <planeGeometry args={[size.width, size.height]} />
+        <planeGeometry args={[size.width, size.height]} />
         <meshBasicMaterial transparent>
           <RenderTexture
-            width={size.width / 5}
-            height={size.height / 5}
+            width={size.width / 15}
+            height={size.height / 15}
             // width={size.width}
             // height={size.height}
             minFilter={LinearFilter}
             magFilter={NearestFilter}
             samples={0}
-            attach='map'
+            attach="map"
           >
-            <PerspectiveCamera
+            <OrthographicCamera
               makeDefault
-              fov={40}
-              position={[
-                0,
-                0,
-                pCamRef.current ? Math.abs((Math.max(size.width, size.height) / 4) * Math.tan(pCamRef?.current.fov * 2)) : 0,
-              ]}
-              ref={pCamRef}
-              far={5000}
+              left={-size.width / 2}
+              right={size.width / 2}
+              top={size.height / 2}
+              bottom={-size.height / 2}
             />
-            <Television />
-            <ambientLight intensity={2} />
-            <directionalLight position={[10, 10, 10]} />
+            <mesh position={[0, 0, -2]}>
+              <planeGeometry
+                args={[
+                  Math.max(size.width, size.height),
+                  Math.max(size.width, size.height),
+                ]}
+              />
+              <RadicalEffect
+                assets={{ noiseMap1: noiseMap1, noiseMap2: noiseMap2 }}
+              />
+            </mesh>
           </RenderTexture>
-        </meshBasicMaterial> */}
+        </meshBasicMaterial>
       </mesh>
     </>
   );
