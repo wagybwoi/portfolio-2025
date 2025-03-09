@@ -19,7 +19,7 @@ const Window = ({ children, theme, inverted = false }) => {
         themes[theme][inverted ? "inverted" : "regular"]
       } top-70 left-70 w-[400px] h-[170px]`}
     >
-      <div className="inner-bar pb-[7px] text-[1.5rem] leading-[70%] font-medium">
+      <div className="inner-bar pb-[7px] h-6 text-[1.5rem] leading-[70%] font-medium">
         SKETCHES
       </div>
       <div className="inner-window h-full">{children}</div>
