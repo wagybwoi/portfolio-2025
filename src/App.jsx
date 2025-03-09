@@ -11,7 +11,7 @@ function App() {
         <Canvas className="fullscreen" gl={{ antialias: false, alpha: true }}>
           <Scene />
         </Canvas>
-        <div className="fullscreen bg-[rgba(0,0,0,0.6)]"></div>
+        <div className="fullscreen" tw="bg-[rgba(0,0,0,0.6)]"></div>
       </div>
       {/* Interface */}
       <main className="fullscreen">

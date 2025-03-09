@@ -10,7 +10,7 @@ export default {
       },
       fontFamily: {
         // Add your custom fonts here
-        // sans: ['Inter', 'sans-serif'],
+        pixelify: ["Pixelify Sans", "sans-serif"],
       },
       spacing: {
         // Add custom spacing values
