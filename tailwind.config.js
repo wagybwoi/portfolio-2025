@@ -5,8 +5,11 @@ export default {
     extend: {
       colors: {
         // Add your custom colors here
-        // primary: '#ff0000',
-        // secondary: '#00ff00',
+        blue: "#0212FE",
+        yellow: "#FAB044",
+        red: "#F61400",
+        cyan: "#99E3E2",
+        magenta: "#F728E4",
       },
       fontFamily: {
         // Add your custom fonts here
