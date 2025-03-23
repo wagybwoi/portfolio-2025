@@ -20,9 +20,8 @@ import {
 import RadicalEffect from "./RadicalEffect.jsx";
 
 const Scene = () => {
-  const { viewport, size, gl, canvas, camera } = useThree();
+  const { size } = useThree();
   const planeRef = useRef();
-  const pCamRef = useRef();
   const [noiseMap1, noiseMap2] = useTexture([
     "seamless_colored_noise_1.png",
     "seamless_colored_noise_2.jpg",

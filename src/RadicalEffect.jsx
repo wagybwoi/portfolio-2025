@@ -3,16 +3,9 @@ import { useFrame } from "@react-three/fiber";
 import {
   OrthographicCamera,
   RenderTexture,
-  Text,
   useTexture,
 } from "@react-three/drei";
-import {
-  Color,
-  LinearFilter,
-  NearestFilter,
-  NearestMipMapNearestFilter,
-  Texture,
-} from "three";
+import { Color, LinearFilter, Texture } from "three";
 
 const vertexShader = `
   varying vec2 vUv;

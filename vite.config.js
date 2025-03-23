@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -7,13 +7,7 @@ export default defineConfig({
   base: "/",
 
   // Configure plugins
-  plugins: [
-    react({
-      babel: {
-        plugins: ["babel-plugin-macros", "babel-plugin-styled-components"],
-      },
-    }),
-  ],
+  plugins: [tailwindcss()],
 
   // Development server settings
   server: {
