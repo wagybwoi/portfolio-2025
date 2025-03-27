@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber";
 
 import Scene from "./Scene";
 import Window from "./Window";
+import Content from "./WindowContent";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
 
       {/* Interface */}
       <main className="fullscreen">
-        <Window theme="black"></Window>
+        <Window theme="black">{Content.intro.markup}</Window>
       </main>
     </>
   );

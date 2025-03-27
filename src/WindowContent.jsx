@@ -12,7 +12,7 @@ const Content = {
             I'm a <span className="text-magenta">fullstack developer</span>{" "}
             based in <span className="text-magenta">Toronto</span>.
           </p>
-          <button>Cool</button>
+          <button className="uppercase">Cool</button>
         </div>
       </>
     ),

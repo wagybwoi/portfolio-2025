@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
 // https://vitejs.dev/config/
@@ -7,7 +8,7 @@ export default defineConfig({
   base: "/",
 
   // Configure plugins
-  plugins: [tailwindcss()],
+  plugins: [react(), tailwindcss()],
 
   // Development server settings
   server: {
@@ -29,6 +30,9 @@ export default defineConfig({
   // CSS configuration
   css: {
     devSourcemap: true,
+    postcss: {
+      plugins: [],
+    },
   },
 
   // Optimize dependencies
