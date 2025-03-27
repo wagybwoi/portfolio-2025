@@ -18,7 +18,9 @@ function App() {
 
       {/* Interface */}
       <main className="fullscreen">
-        <Window theme="black">{Content.intro.markup}</Window>
+        <Window title="Sketches" theme="black">
+          {Content.intro.markup}
+        </Window>
       </main>
     </>
   );

@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/web";
 
-const Window = ({ children, theme, inverted = false }) => {
+const Window = ({ children, title, theme, inverted = false }) => {
   const [isOpen, setIsOpen] = useState(true);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: 400, y: 200 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const windowRef = useRef(null);
@@ -22,6 +22,7 @@ const Window = ({ children, theme, inverted = false }) => {
         y: clientY - rect.top,
       });
       setIsDragging(true);
+      document.querySelector("body").style.cursor = "grabbing";
     }
   };
 
@@ -36,6 +37,7 @@ const Window = ({ children, theme, inverted = false }) => {
 
   const handleDragEnd = () => {
     setIsDragging(false);
+    document.querySelector("body").style.removeProperty("cursor");
   };
 
   // Mouse event handlers
@@ -89,12 +91,11 @@ const Window = ({ children, theme, inverted = false }) => {
       ref={windowRef}
     >
       <div
-        className="inner-bar"
+        className={`inner-bar ${isDragging ? "grabbing" : ""}`}
         onMouseDown={onMouseDown}
         onTouchStart={onTouchStart}
-        style={{ cursor: "move" }}
       >
-        <h2 className="mr-6">SKETCHES</h2>
+        <h2 className="select-none mr-6">{title}</h2>
         <button
           className="close-button"
           onClick={() => {

@@ -2,6 +2,7 @@ import React from "react";
 
 const Content = {
   intro: {
+    title: "Sketches",
     markup: (
       <>
         <div className="p-8 text-3xl w-[457px]">

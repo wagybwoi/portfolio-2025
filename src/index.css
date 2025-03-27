@@ -92,9 +92,20 @@ body {
     line-height: 70%;
     font-weight: 500;
     margin-bottom: 0.5rem;
+    cursor: grab;
+
+    &.grabbing {
+      cursor: grabbing;
+    }
+
+    & > h2 {
+      -webkit-user-select: none;
+      user-select: none;
+    }
 
     & > .close-button {
       min-width: 0;
+      cursor: pointer;
     }
 
     & > button:not(.close-button) {
@@ -107,6 +118,7 @@ body {
       padding: 40px 8px;
       border-radius: 5px;
       border-color: white;
+      cursor: pointer;
     }
   }
 
