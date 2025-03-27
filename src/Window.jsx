@@ -1,13 +1,99 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/web";
 
 const Window = ({ children, theme, inverted = false }) => {
   const [isOpen, setIsOpen] = useState(true);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const windowRef = useRef(null);
+
   const scale = useSpring({ y: isOpen ? 1 : 0, config: { duration: 75 } });
+  const move = useSpring({
+    transform: `translate(${position.x}px, ${position.y}px)`,
+    config: { tension: 500 },
+  });
+
+  const handleDragStart = (clientX, clientY) => {
+    if (windowRef.current) {
+      const rect = windowRef.current.getBoundingClientRect();
+      setDragOffset({
+        x: clientX - rect.left,
+        y: clientY - rect.top,
+      });
+      setIsDragging(true);
+    }
+  };
+
+  const handleDragMove = (clientX, clientY) => {
+    if (isDragging) {
+      setPosition({
+        x: clientX - dragOffset.x,
+        y: clientY - dragOffset.y,
+      });
+    }
+  };
+
+  const handleDragEnd = () => {
+    setIsDragging(false);
+  };
+
+  // Mouse event handlers
+  const onMouseDown = (e) => {
+    handleDragStart(e.clientX, e.clientY);
+  };
+
+  // Touch event handlers
+  const onTouchStart = (e) => {
+    const touch = e.touches[0];
+    handleDragStart(touch.clientX, touch.clientY);
+  };
+
+  useEffect(() => {
+    const onMouseMove = (e) => {
+      handleDragMove(e.clientX, e.clientY);
+    };
+
+    const onTouchMove = (e) => {
+      const touch = e.touches[0];
+      handleDragMove(touch.clientX, touch.clientY);
+    };
+
+    const onMouseUp = () => {
+      handleDragEnd();
+    };
+
+    const onTouchEnd = () => {
+      handleDragEnd();
+    };
+
+    if (isDragging) {
+      window.addEventListener("mousemove", onMouseMove);
+      window.addEventListener("mouseup", onMouseUp);
+      window.addEventListener("touchmove", onTouchMove, { passive: false });
+      window.addEventListener("touchend", onTouchEnd);
+    }
+
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [isDragging, dragOffset]);
 
   return (
-    <animated.div className="window top-72 left-72" style={{ scaleY: scale.y }}>
-      <div className="inner-bar">
+    <animated.div
+      className="window"
+      style={{ ...move, scaleY: scale.y }}
+      ref={windowRef}
+    >
+      <div
+        className="inner-bar"
+        onMouseDown={onMouseDown}
+        onTouchStart={onTouchStart}
+        style={{ cursor: "move" }}
+      >
         <h2 className="mr-6">SKETCHES</h2>
         <button
           className="close-button"
