@@ -27,11 +27,11 @@
 @theme {
   --font-pixelify: "Pixelify Sans";
 
-  --color-blue: #0212fe;
-  --color-yellow: #fab044;
   --color-red: #f61400;
+  --color-blue: #0212fe;
   --color-cyan: #99e3e2;
   --color-magenta: #f728e4;
+  --color-yellow: #fab044;
 }
 
 :root {
@@ -65,9 +65,59 @@ body {
   left: 0;
 }
 
+.theme-black {
+  --primary-window-color: black;
+  --secondary-window-color: white;
+
+  &.inverted {
+    --primary-window-color: white;
+    --secondary-window-color: black;
+  }
+}
+
+.theme-red {
+  --primary-window-color: white;
+  --secondary-window-color: var(--color-red);
+
+  &.inverted {
+    --primary-window-color: var(--color-red);
+    --secondary-window-color: white;
+  }
+}
+
+.theme-blue {
+  --primary-window-color: var(--color-blue);
+  --secondary-window-color: white;
+}
+
+.theme-cyan {
+  --primary-window-color: var(--color-cyan);
+  --secondary-window-color: black;
+}
+
+.theme-yellow {
+  --primary-window-color: var(--color-yellow);
+  --secondary-window-color: black;
+
+  &.inverted {
+    --primary-window-color: black;
+    --secondary-window-color: var(--color-yellow);
+  }
+}
+
+.theme-magenta {
+  --primary-window-color: var(--color-magenta);
+  --secondary-window-color: black;
+
+  &.inverted {
+    --primary-window-color: black;
+    --secondary-window-color: var(--color-magenta);
+  }
+}
+
 .window {
   position: absolute;
-  border: 5px solid white;
+  border: 5px solid var(--secondary-window-color);
   border-radius: 5px;
   padding: 7px;
   padding-top: 10px;
@@ -75,16 +125,17 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: white;
-  border: black;
-  color: black;
+  background-color: var(--secondary-window-color);
+  border: var(--primary-window-color);
+  color: var(--primary-window-color);
   transform-origin: center;
   text-transform: uppercase;
-  border: 5px solid black;
+  border: 5px solid var(--primary-window-color);
 
+  /* INNER BAR */
   & > .inner-bar {
     width: 100%;
-    color: black;
+    color: var(--primary-window-color);
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
@@ -106,6 +157,10 @@ body {
     & > .close-button {
       min-width: 0;
       cursor: pointer;
+
+      & > svg > path {
+        fill: var(--primary-window-color);
+      }
     }
 
     & > button:not(.close-button) {
@@ -117,19 +172,25 @@ body {
       line-height: 80%;
       padding: 40px 8px;
       border-radius: 5px;
-      border-color: white;
+      border-color: var(--secondary-window-color);
       cursor: pointer;
     }
   }
 
-  & > .inner-bar > button > svg > path {
-    fill: black;
-  }
-
+  /* INNER WINDOW */
   & > .inner-window {
-    background: black;
-    color: white;
+    background-color: var(--primary-window-color);
+    color: var(--secondary-window-color);
     width: 100%;
     height: 100%;
+
+    & > h2,
+    p,
+    ul,
+    li,
+    a {
+      -webkit-user-select: none;
+      user-select: none;
+    }
   }
 }

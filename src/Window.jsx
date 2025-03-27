@@ -1,9 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/web";
 
-const Window = ({ children, title, theme, inverted = false }) => {
+const Window = ({
+  children,
+  pos,
+  title,
+  theme = "black",
+  inverted = false,
+}) => {
   const [isOpen, setIsOpen] = useState(true);
-  const [position, setPosition] = useState({ x: 400, y: 200 });
+  const [position, setPosition] = useState({ x: pos.x, y: pos.y });
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const windowRef = useRef(null);
@@ -86,7 +92,7 @@ const Window = ({ children, title, theme, inverted = false }) => {
 
   return (
     <animated.div
-      className="window"
+      className={`window theme-${theme} ${inverted ? "inverted" : ""}`}
       style={{ ...move, scaleY: scale.y }}
       ref={windowRef}
     >
@@ -95,7 +101,7 @@ const Window = ({ children, title, theme, inverted = false }) => {
         onMouseDown={onMouseDown}
         onTouchStart={onTouchStart}
       >
-        <h2 className="select-none mr-6">{title}</h2>
+        <h2 className="mr-6">{title}</h2>
         <button
           className="close-button"
           onClick={() => {
