@@ -20,7 +20,7 @@ const content = {
   socials: {
     markup: (
       <>
-        <div className="p-8 text-7xl font-bold w-[400px]">
+        <div className="p-4 text-5xl font-bold w-[350px]">
           <ul className="flex justify-center items-center gap-10 [&>li]:flex [&>li]:justify-center [&>li]:items-center [&>li]:hover:text-black [&>li]:hover:underline">
             <li>
               <a

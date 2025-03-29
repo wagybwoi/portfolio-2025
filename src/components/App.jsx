@@ -1,10 +1,10 @@
 import React from "react";
 import { Canvas } from "@react-three/fiber";
 
-import Scene from "./Scene";
-import Window from "./Window";
+import Scene from "./Three/Scene";
+import Window from "./Windows/Window";
 
-import content from "./WindowContent";
+import content from "./Windows/WindowContent/WindowContent";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
 
       {/* Interface */}
       <main className="fullscreen">
-        <Window title="Sketches" theme="black" pos={{ x: 800, y: 450 }}>
+        <Window title="Welcome" theme="black" pos={{ x: 800, y: 450 }}>
           {content.welcome.markup}
         </Window>
         <Window title="Socials" theme="red" pos={{ x: 400, y: 200 }}>

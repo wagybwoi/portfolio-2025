@@ -184,11 +184,12 @@ body {
     width: 100%;
     height: 100%;
 
-    & > h2,
+    & h2,
     p,
     ul,
     li,
-    a {
+    a,
+    button {
       -webkit-user-select: none;
       user-select: none;
     }

@@ -105,7 +105,6 @@ const Window = ({
         <button
           className="close-button"
           onClick={() => {
-            console.log("close window");
             setIsOpen(!isOpen);
           }}
         >
