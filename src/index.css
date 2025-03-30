@@ -162,19 +162,6 @@ body {
         fill: var(--primary-window-color);
       }
     }
-
-    & > button:not(.close-button) {
-      min-width: 132px;
-      margin: auto;
-      display: block;
-      text-transform: uppercase;
-      font-size: 28px;
-      line-height: 80%;
-      padding: 40px 8px;
-      border-radius: 5px;
-      border-color: var(--secondary-window-color);
-      cursor: pointer;
-    }
   }
 
   /* INNER WINDOW */
@@ -192,6 +179,19 @@ body {
     button {
       -webkit-user-select: none;
       user-select: none;
+    }
+
+    & button {
+      min-width: 132px;
+      margin: auto;
+      display: block;
+      text-transform: uppercase;
+      font-size: 28px;
+      line-height: 80%;
+      padding: 0.5rem 2.5rem;
+      border-radius: 5px;
+      border: 5px solid var(--secondary-window-color);
+      cursor: pointer;
     }
   }
 }

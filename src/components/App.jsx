@@ -4,7 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import Scene from "./Three/Scene";
 import Window from "./Windows/Window";
 
-import content from "./Windows/WindowContent/WindowContent";
+import Content from "./Windows/WindowContent/WindowContent";
 
 function App() {
   return (
@@ -19,11 +19,14 @@ function App() {
 
       {/* Interface */}
       <main className="fullscreen">
-        <Window title="Welcome" theme="black" pos={{ x: 800, y: 450 }}>
-          {content.welcome.markup}
-        </Window>
+        <Window
+          title="Welcome"
+          theme="black"
+          pos={{ x: 800, y: 450 }}
+          ChildComponent={Content.Welcome}
+        />
         <Window title="Socials" theme="red" pos={{ x: 400, y: 200 }}>
-          {content.socials.markup}
+          <Content.Socials />
         </Window>
       </main>
     </>

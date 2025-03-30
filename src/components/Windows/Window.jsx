@@ -3,6 +3,7 @@ import { useSpring, animated } from "@react-spring/web";
 
 const Window = ({
   children,
+  ChildComponent = null,
   pos,
   title,
   theme = "black",
@@ -105,7 +106,7 @@ const Window = ({
         <button
           className="close-button"
           onClick={() => {
-            setIsOpen(!isOpen);
+            setIsOpen(false);
           }}
         >
           <svg
@@ -119,7 +120,15 @@ const Window = ({
           </svg>
         </button>
       </div>
-      <div className="inner-window">{children}</div>
+      <div className="inner-window">
+        {children || (
+          <ChildComponent
+            close={() => {
+              setIsOpen(false);
+            }}
+          />
+        )}
+      </div>
     </animated.div>
   );
 };
