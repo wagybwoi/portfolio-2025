@@ -25,8 +25,19 @@ function App() {
           pos={{ x: 800, y: 450 }}
           ChildComponent={Content.Welcome}
         />
-        <Window title="Socials" theme="red" pos={{ x: 400, y: 200 }}>
+        {/* <Window title="Socials" theme="red" pos={{ x: 400, y: 200 }}>
           <Content.Socials />
+        </Window> */}
+        <Window title="Sketches" theme="blue" pos={{ x: 400, y: 200 }}>
+          <Content.Sketches />
+        </Window>
+        <Window
+          title="Contact Me"
+          theme="yellow"
+          inverted
+          pos={{ x: 100, y: 100 }}
+        >
+          <Content.Contact />
         </Window>
       </main>
     </>
