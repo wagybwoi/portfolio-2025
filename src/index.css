@@ -176,12 +176,13 @@ body {
     ul,
     li,
     a,
+    label,
     button {
       -webkit-user-select: none;
       user-select: none;
     }
 
-    & button {
+    & .button {
       min-width: 132px;
       margin: auto;
       display: block;

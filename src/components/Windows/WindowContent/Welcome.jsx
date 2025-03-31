@@ -3,14 +3,14 @@ import React from "react";
 const Welcome = ({ close }) => {
   return (
     <div className="p-8 text-3xl w-[457px]">
-      <h2 className="mb-7">
+      <h3 className="mb-7">
         My name is <span className="text-magenta">Ahmed Wageh</span>
-      </h2>
+      </h3>
       <p className="mb-7 leading-[100%]">
         I'm a <span className="text-magenta">fullstack developer</span> based in{" "}
         <span className="text-magenta">Toronto</span>.
       </p>
-      <button className="uppercase" onClick={close}>
+      <button className="button uppercase" onClick={close}>
         Cool
       </button>
     </div>
