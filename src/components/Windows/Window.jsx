@@ -11,13 +11,21 @@ const Window = ({
   theme = "black",
   inverted = false,
 }) => {
-  const [isOpen, setIsOpen] = useState(true);
-  const [position, setPosition] = useState({ x: pos.x, y: pos.y });
+  const [isOpen, setIsOpen] = useState(false);
+  const [position, setPosition] = useState({ x: pos?.x || 0, y: pos?.y || 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const windowRef = useRef(null);
 
-  const scale = useSpring({ y: isOpen ? 1 : 0, config: { duration: 75 } });
+  useEffect(() => {
+    setIsOpen(true);
+  }, []);
+
+  const scale = useSpring({
+    y: isOpen ? 1 : 0,
+    config: { duration: 75 },
+  });
+
   const move = useSpring({
     transform: `translate(${position.x}px, ${position.y}px)`,
     config: { tension: 500 },

@@ -117,6 +117,8 @@ body {
 
 .window {
   position: absolute;
+  top: 0;
+  left: 0;
   border: 5px solid var(--secondary-window-color);
   border-radius: 5px;
   padding: 7px;
@@ -142,7 +144,6 @@ body {
     font-size: 2rem;
     line-height: 70%;
     font-weight: 500;
-    margin-bottom: 0.5rem;
     cursor: grab;
 
     &.grabbing {
@@ -170,8 +171,10 @@ body {
     color: var(--secondary-window-color);
     width: 100%;
     height: 100%;
+    margin-top: 0.5rem;
 
     & h2,
+    h3,
     p,
     ul,
     li,
@@ -187,12 +190,55 @@ body {
       margin: auto;
       display: block;
       text-transform: uppercase;
-      font-size: 28px;
+      font-size: 1.75rem;
       line-height: 80%;
       padding: 0.5rem 2.5rem;
       border-radius: 5px;
       border: 5px solid var(--secondary-window-color);
       cursor: pointer;
+    }
+  }
+}
+
+.desktop {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 200px 1fr min-content;
+  gap: 1.5rem;
+
+  & > .desktop-icons-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+
+    & > .desktop-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      width: 80px;
+      font-size: 1.25rem;
+      line-height: 1.325rem;
+      text-align: center;
+      margin: 0 auto;
+
+      & > .desktop-icon-image,
+      & > .desktop-icon-missing {
+        width: 100%;
+        padding-bottom: 100%;
+        background-color: white;
+        border-radius: 5px;
+        border: 3px solid black;
+      }
+
+      & > .desktop-icon-title {
+        text-align: center;
+        margin-top: 0.5rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+        user-select: none;
+      }
     }
   }
 }
