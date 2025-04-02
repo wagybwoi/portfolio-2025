@@ -10,6 +10,7 @@ const Window = ({
   title,
   theme = "black",
   inverted = false,
+  removeFromState,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [position, setPosition] = useState({ x: pos?.x || 0, y: pos?.y || 0 });
@@ -23,7 +24,13 @@ const Window = ({
 
   const scale = useSpring({
     y: isOpen ? 1 : 0,
-    config: { duration: 75 },
+    config: {
+      duration: 75,
+    },
+    onRest: (e) => {
+      // Once window is visually closed, remove from App state
+      if (e.value.y === 0) removeFromState(title);
+    },
   });
 
   const move = useSpring({
@@ -101,9 +108,13 @@ const Window = ({
     };
   }, [isDragging, dragOffset]);
 
+  const close = () => {
+    setIsOpen(false);
+  };
+
   return (
     <animated.div
-      className={`window theme-${theme} ${inverted ? "inverted" : ""}`}
+      className={`window theme-${theme}${inverted ? " inverted" : ""}`}
       style={{ ...move, scaleY: scale.y }}
       ref={windowRef}
     >
@@ -113,23 +124,12 @@ const Window = ({
         onTouchStart={onTouchStart}
       >
         <h2 className="mr-6">{title}</h2>
-        <button
-          className="close-button"
-          onClick={() => {
-            setIsOpen(false);
-          }}
-        >
+        <button className="close-button" onClick={close}>
           <CloseButtonIcon />
         </button>
       </div>
       <div className="inner-window">
-        {children || (
-          <ChildComponent
-            close={() => {
-              setIsOpen(false);
-            }}
-          />
-        )}
+        {children || <ChildComponent close={close} />}
       </div>
     </animated.div>
   );

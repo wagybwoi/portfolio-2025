@@ -113,7 +113,15 @@ function App() {
   }, []);
 
   const openWindow = (window) => {
-    setWindows([...windows, window]);
+    // Check if window is already in state
+    if (!windows.some((w) => w.title === window.title)) {
+      setWindows([...windows, window]);
+    }
+  };
+
+  const closeWindow = (windowTitle) => {
+    // Remove window from state
+    setWindows(windows.filter((w) => w.title !== windowTitle));
   };
 
   return (
@@ -157,10 +165,11 @@ function App() {
         {/* Windows */}
         {windows.map((windowItem, index) => (
           <Window
-            title={windowItem.title}
             key={index}
+            title={windowItem.title}
             ChildComponent={windowItem.WindowContent}
             {...windowItem.props}
+            removeFromState={closeWindow}
           />
         ))}
 
