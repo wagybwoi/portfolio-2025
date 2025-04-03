@@ -76,22 +76,22 @@ const windowData = {
 
 const mainIcons = [
   {
-    title: "About",
+    name: "About",
     iconSrc: undefined,
     window: windowData["About"],
   },
   {
-    title: "Sketches",
+    name: "Sketches",
     iconSrc: undefined,
     window: windowData["Sketches"],
   },
   {
-    title: "Socials",
+    name: "Socials",
     iconSrc: undefined,
     window: windowData["Socials"],
   },
   {
-    title: "Contact",
+    name: "Contact",
     iconSrc: undefined,
     window: windowData["Contact"],
   },
@@ -106,11 +106,11 @@ function App() {
 
   // Trigger default Welcome window
   // TODO: make sure setTimeout is using the correct state
-  useEffect(() => {
-    setTimeout(() => {
-      setWindows([...windows, windowData.Sketches]);
-    }, 1000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setWindows([...windows, windowData.Sketches]);
+  //   }, 1000);
+  // }, []);
 
   const openWindow = (window) => {
     // Check if window is already in state
@@ -120,6 +120,9 @@ function App() {
   };
 
   const closeWindow = (windowTitle) => {
+    console.log("removing", windowTitle);
+    console.log(windows);
+    // console.log(windows.filter((w) => w.title !== windowTitle));
     // Remove window from state
     setWindows(windows.filter((w) => w.title !== windowTitle));
   };
@@ -156,16 +159,16 @@ function App() {
                 ) : (
                   <div className="desktop-icon-missing" />
                 )}
-                <div className="desktop-icon-title">{icon.title}</div>
+                <div className="desktop-icon-title">{icon.name}</div>
               </button>
             ))}
           </div>
         </div>
 
         {/* Windows */}
-        {windows.map((windowItem, index) => (
+        {windows.map((windowItem) => (
           <Window
-            key={index}
+            key={`window-${windowItem.title}`}
             title={windowItem.title}
             ChildComponent={windowItem.WindowContent}
             {...windowItem.props}

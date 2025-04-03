@@ -29,7 +29,9 @@ const Window = ({
     },
     onRest: (e) => {
       // Once window is visually closed, remove from App state
-      if (e.value.y === 0) removeFromState(title);
+      if (e.value.y === 0) {
+        removeFromState(title);
+      }
     },
   });
 
@@ -50,20 +52,6 @@ const Window = ({
     }
   };
 
-  const handleDragMove = (clientX, clientY) => {
-    if (isDragging) {
-      setPosition({
-        x: clientX - dragOffset.x,
-        y: clientY - dragOffset.y,
-      });
-    }
-  };
-
-  const handleDragEnd = () => {
-    setIsDragging(false);
-    document.querySelector("body").style.removeProperty("cursor");
-  };
-
   // Mouse event handlers
   const onMouseDown = (e) => {
     handleDragStart(e.clientX, e.clientY);
@@ -76,6 +64,20 @@ const Window = ({
   };
 
   useEffect(() => {
+    const handleDragMove = (clientX, clientY) => {
+      if (isDragging) {
+        setPosition({
+          x: clientX - dragOffset.x,
+          y: clientY - dragOffset.y,
+        });
+      }
+    };
+
+    const handleDragEnd = () => {
+      setIsDragging(false);
+      document.querySelector("body").style.removeProperty("cursor");
+    };
+
     const onMouseMove = (e) => {
       handleDragMove(e.clientX, e.clientY);
     };
