@@ -10,7 +10,7 @@ const Window = ({
   title,
   theme = "black",
   inverted = false,
-  removeFromState,
+  removeWindow,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [position, setPosition] = useState({ x: pos?.x || 0, y: pos?.y || 0 });
@@ -30,7 +30,7 @@ const Window = ({
     onRest: (e) => {
       // Once window is visually closed, remove from App state
       if (e.value.y === 0) {
-        removeFromState(title);
+        removeWindow(title);
       }
     },
   });

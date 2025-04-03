@@ -100,10 +100,6 @@ const mainIcons = [
 function App() {
   const [windows, setWindows] = useState([]);
 
-  useEffect(() => {
-    console.log(windows);
-  }, [windows]);
-
   // Trigger default Welcome window
   // TODO: make sure setTimeout is using the correct state
   // useEffect(() => {
@@ -112,18 +108,15 @@ function App() {
   //   }, 1000);
   // }, []);
 
-  const openWindow = (window) => {
+  const addWindow = (window) => {
     // Check if window is already in state
     if (!windows.some((w) => w.title === window.title)) {
       setWindows([...windows, window]);
     }
   };
 
-  const closeWindow = (windowTitle) => {
-    console.log("removing", windowTitle);
-    console.log(windows);
-    // console.log(windows.filter((w) => w.title !== windowTitle));
-    // Remove window from state
+  // Remove window from state
+  const removeWindow = (windowTitle) => {
     setWindows(windows.filter((w) => w.title !== windowTitle));
   };
 
@@ -147,7 +140,7 @@ function App() {
                 className="desktop-icon"
                 key={`main-icon-${index}`}
                 onClick={() => {
-                  openWindow(icon.window);
+                  addWindow(icon.window);
                 }}
               >
                 {icon?.iconSrc ? (
@@ -172,33 +165,9 @@ function App() {
             title={windowItem.title}
             ChildComponent={windowItem.WindowContent}
             {...windowItem.props}
-            removeFromState={closeWindow}
+            removeWindow={removeWindow}
           />
         ))}
-
-        {/* <Window
-          title="Welcome"
-          theme="black"
-          pos={{ x: 800, y: 450 }}
-          ChildComponent={WindowTypes.Welcome}
-        /> */}
-
-        {/* <Window title="Socials" theme="red" pos={{ x: 400, y: 200 }}>
-          <WindowTypes.Socials />
-        </Window> */}
-
-        {/* <Window title="Sketches" theme="blue" pos={{ x: 400, y: 200 }}>
-          <WindowTypes.Sketches />
-        </Window> */}
-
-        {/* <Window
-          title="Contact"
-          theme="yellow"
-          inverted
-          pos={{ x: 100, y: 100 }}
-        >
-          <WindowTypes.Contact />
-        </Window> */}
       </main>
     </>
   );
