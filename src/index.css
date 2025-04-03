@@ -203,7 +203,7 @@ body {
 .desktop {
   padding: 2rem;
   display: grid;
-  grid-template-columns: 200px 1fr min-content;
+  grid-template-columns: 400px 1fr min-content;
   gap: 1.5rem;
 
   & > .desktop-icons-main {
@@ -216,9 +216,7 @@ body {
       flex-direction: column;
       align-items: center;
       cursor: pointer;
-      width: 80px;
-      font-size: 1.25rem;
-      line-height: 1.325rem;
+      width: 120px;
       text-align: center;
       margin: 0 auto;
 
@@ -233,6 +231,8 @@ body {
 
       & > .desktop-icon-title {
         text-align: center;
+        font-size: 2rem;
+        line-height: 2.5rem;
         margin-top: 0.5rem;
         font-weight: 700;
         text-transform: uppercase;
