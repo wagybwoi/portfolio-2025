@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useSpring, animated } from "@react-spring/web";
+import { useSpring, animated, easings } from "@react-spring/web";
 
 import CloseButtonIcon from "./CloseButtonIcon";
 
@@ -25,7 +25,8 @@ const Window = ({
   const scale = useSpring({
     y: isOpen ? 1 : 0,
     config: {
-      duration: 75,
+      duration: isOpen ? 140 : 70,
+      easing: isOpen ? easings.easeOutBack : easings.easeOutQuad,
     },
     onRest: (e) => {
       // Once window is visually closed, remove from App state
