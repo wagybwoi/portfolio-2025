@@ -26,7 +26,7 @@ const Experiments = () => {
           </MenuButton>
           <MenuItems
             anchor="bottom"
-            className="bg-blue relative border-x-[5px] border-b-[5px] rounded-b-[5px] border-white w-[320px]"
+            className="bg-blue relative border-x-[5px] border-b-[5px] rounded-b-[5px] border-white w-[320px] z-11"
           >
             {experiments.map((sketch, index) => (
               <MenuItem
