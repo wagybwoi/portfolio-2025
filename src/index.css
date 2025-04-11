@@ -119,6 +119,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 10;
   border: 5px solid var(--secondary-window-color);
   border-radius: 5px;
   padding: 7px;
@@ -219,14 +220,24 @@ body {
       width: 120px;
       text-align: center;
       margin: 0 auto;
-
       & > .desktop-icon-image,
       & > .desktop-icon-missing {
         width: 100%;
-        padding-bottom: 100%;
+        transition: scale 0.2s ease, rotate 0.2s ease;
+        user-select: none;
+      }
+
+      &:hover > .desktop-icon-image,
+      &:hover > .desktop-icon-missing {
+        scale: 1.4;
+        rotate: -10deg;
+      }
+
+      & > .desktop-icon-missing {
         background-color: white;
         border-radius: 5px;
         border: 3px solid black;
+        padding-bottom: 100%;
       }
 
       & > .desktop-icon-title {
@@ -238,6 +249,7 @@ body {
         text-transform: uppercase;
         text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
         user-select: none;
+        z-index: 1;
       }
     }
   }

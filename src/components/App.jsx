@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Canvas } from "@react-three/fiber";
 
 import Scene from "./Three/Scene";
 import Window from "./Windows/Window";
-
 import WindowTypes from "./Windows/WindowContent/WindowTypes";
+
+import aboutIcon from "../images/icons/about.png";
+import socialsIcon from "../images/icons/socials.png";
+import experimentsIcon from "../images/icons/experiments.png";
+import contactIcon from "../images/icons/contact.png";
 
 const windowData = {
   Welcome: {
@@ -18,7 +22,6 @@ const windowData = {
         y: 450,
       },
     },
-    iconSrc: "",
   },
   About: {
     title: "About Me",
@@ -31,11 +34,10 @@ const windowData = {
         y: 450,
       },
     },
-    iconSrc: "",
   },
-  Sketches: {
-    title: "Sketches",
-    WindowContent: WindowTypes.Sketches,
+  Experiments: {
+    title: "Experiments",
+    WindowContent: WindowTypes.Experiments,
     props: {
       theme: "blue",
       inverted: false,
@@ -44,7 +46,6 @@ const windowData = {
         y: 200,
       },
     },
-    iconSrc: "",
   },
   Socials: {
     title: "Socials",
@@ -57,7 +58,6 @@ const windowData = {
         y: 200,
       },
     },
-    iconSrc: "",
   },
   Contact: {
     title: "Contact Me",
@@ -70,30 +70,29 @@ const windowData = {
         y: 100,
       },
     },
-    iconSrc: "",
   },
 };
 
 const mainIcons = [
   {
     name: "About",
-    iconSrc: undefined,
     window: windowData["About"],
+    iconSrc: aboutIcon,
   },
   {
-    name: "Sketches",
-    iconSrc: undefined,
-    window: windowData["Sketches"],
+    name: "Experiments",
+    window: windowData["Experiments"],
+    iconSrc: experimentsIcon,
   },
   {
     name: "Socials",
-    iconSrc: undefined,
     window: windowData["Socials"],
+    iconSrc: socialsIcon,
   },
   {
     name: "Contact",
-    iconSrc: undefined,
     window: windowData["Contact"],
+    iconSrc: contactIcon,
   },
 ];
 
@@ -104,7 +103,7 @@ function App() {
   // TODO: make sure setTimeout is using the correct state
   // useEffect(() => {
   //   setTimeout(() => {
-  //     setWindows([...windows, windowData.Sketches]);
+  //     setWindows([...windows, windowData.Experiments]);
   //   }, 1000);
   // }, []);
 
@@ -148,6 +147,7 @@ function App() {
                     src={icon.iconSrc}
                     alt=""
                     className="desktop-icon-image"
+                    draggable="false"
                   />
                 ) : (
                   <div className="desktop-icon-missing" />

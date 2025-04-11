@@ -1,5 +1,9 @@
 import React from "react";
 
+import instagramIcon from "../../../images/icons/instagram.png";
+import linkedinIcon from "../../../images/icons/linkedin.png";
+import githubIcon from "../../../images/icons/github.png";
+
 const Socials = () => {
   return (
     <div className="p-4 text-5xl font-bold w-[350px]">
@@ -10,7 +14,7 @@ const Socials = () => {
             rel="noopener noreferrer"
             target="_blank"
           >
-            GH
+            <img src={githubIcon} alt="Github" className="w-[120px]" />
           </a>
         </li>
         <li>
@@ -19,7 +23,7 @@ const Socials = () => {
             rel="noopener noreferrer"
             target="_blank"
           >
-            IG
+            <img src={instagramIcon} alt="Instagram" className="w-[120px]" />
           </a>
         </li>
         <li>
@@ -28,7 +32,7 @@ const Socials = () => {
             rel="noopener noreferrer"
             target="_blank"
           >
-            LI
+            <img src={linkedinIcon} alt="LinkedIn" className="w-[120px]" />
           </a>
         </li>
       </ul>
