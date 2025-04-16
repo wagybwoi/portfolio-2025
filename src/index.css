@@ -205,12 +205,12 @@ body {
   padding: 2rem;
   display: grid;
   grid-template-columns: 400px 1fr min-content;
-  gap: 1.5rem;
+  gap: 1rem;
 
   & > .desktop-icons-main {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 2rem;
 
     & > .desktop-icon {
       display: flex;

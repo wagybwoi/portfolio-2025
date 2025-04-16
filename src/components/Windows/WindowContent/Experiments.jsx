@@ -1,11 +1,32 @@
 import React, { useState } from "react";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 
+import boidlingz from "../../videos/boidlingz.webm";
+import yokai from "../../videos/yokai.webm";
+import extrudes from "../../videos/extrudes.webm";
+import torus from "../../videos/torus.webm";
+import cool from "../../videos/cool.webm";
+import redOutlines from "../../videos/red-outlines.webm";
+import blueOutlines from "../../videos/blue-outlines.webm";
+import radical from "../../videos/radical.webm";
+import cubeType from "../../videos/cube-type.webm";
+import everythingOrNothing from "../../videos/everything-or-nothing.webm";
+import refractionBlob from "../../videos/refraction-blob.webm";
+import mando from "../../videos/mando.webm";
+
 const experiments = [
-  { name: "Torus" },
-  { name: "Extrudes" },
-  { name: "Mando" },
-  { name: "Cool" },
+  { name: "Boidlingz", video: boidlingz },
+  { name: "Yokai", video: yokai },
+  { name: "Extrudes", video: extrudes },
+  { name: "Torus", video: torus },
+  { name: "Cool", video: cool },
+  { name: "Radical", video: radical },
+  { name: "Red Outlines", video: redOutlines },
+  { name: "Blue Outlines", video: blueOutlines },
+  { name: "Cube Type", video: cubeType },
+  { name: "Everything", video: everythingOrNothing },
+  { name: "Refraction", video: refractionBlob },
+  { name: "Mando", video: mando },
 ];
 
 const Experiments = () => {
@@ -41,15 +62,29 @@ const Experiments = () => {
           </MenuItems>
         </Menu>
       </div>
-      {experiments[experimentIndex]?.src ? (
-        <img src={experiments[experimentIndex]?.src} alt="" />
-      ) : (
-        <div className="relative w-full pb-[100%] flex justify-center items-center text-3xl">
-          <span className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-full text-center select-none">
-            &lt;File not found&gt;
-          </span>
-        </div>
-      )}
+      <div className="w-[500px] h-[500px] border-[5px] border-white">
+        {experiments[experimentIndex]?.video ? (
+          <video
+            src={experiments[experimentIndex]?.video}
+            autoPlay
+            loop
+            muted
+            className="w-full h-full"
+          />
+        ) : experiments[experimentIndex]?.image ? (
+          <img
+            src={experiments[experimentIndex]?.image}
+            alt=""
+            className="w-full h-full"
+          />
+        ) : (
+          <div className="relative w-full h-full flex justify-center items-center text-3xl">
+            <span className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-full text-center select-none">
+              &lt;File not found&gt;
+            </span>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
