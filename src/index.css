@@ -137,6 +137,7 @@ body {
     text-transform: uppercase;
     text-align: center;
     margin-top: -20vh;
+    user-select: none;
 
     @media (width >= 48rem) {
       margin-top: 0;
@@ -216,7 +217,7 @@ body {
 
   @media (width >= 48rem) {
     grid-template-columns: 200px 1fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: 120px;
   }
 
   & > .desktop-icons-main {
@@ -391,7 +392,7 @@ body {
       @media (width >= 48rem) {
         border-width: 5px;
         font-size: 1.75rem;
-        padding: 0.5rem 2.5rem;
+        padding: 0.5rem 2rem;
       }
     }
   }
