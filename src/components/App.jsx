@@ -18,9 +18,13 @@ const windowData = {
       theme: "black",
       inverted: false,
       pos: {
-        x: 800,
-        y: 450,
+        x: 0,
+        y: 0,
       },
+      // pos: {
+      //   x: 800,
+      //   y: 450,
+      // },
     },
   },
   About: {
@@ -30,9 +34,13 @@ const windowData = {
       theme: "black",
       inverted: false,
       pos: {
-        x: 800,
-        y: 450,
+        x: 0,
+        y: 0,
       },
+      // pos: {
+      //   x: 800,
+      //   y: 450,
+      // },
     },
   },
   Experiments: {
@@ -42,9 +50,13 @@ const windowData = {
       theme: "blue",
       inverted: false,
       pos: {
-        x: 400,
-        y: 200,
+        x: 0,
+        y: 0,
       },
+      // pos: {
+      //   x: 400,
+      //   y: 200,
+      // },
     },
   },
   Socials: {
@@ -54,9 +66,13 @@ const windowData = {
       theme: "red",
       inverted: false,
       pos: {
-        x: 400,
-        y: 200,
+        x: 0,
+        y: 0,
       },
+      // pos: {
+      //   x: 400,
+      //   y: 200,
+      // },
     },
   },
   Contact: {
@@ -66,9 +82,13 @@ const windowData = {
       theme: "yellow",
       inverted: true,
       pos: {
-        x: 100,
-        y: 100,
+        x: 0,
+        y: 0,
       },
+      // pos: {
+      //   x: 100,
+      //   y: 100,
+      // },
     },
   },
 };
@@ -126,7 +146,11 @@ function App() {
         <Canvas className="fullscreen" gl={{ antialias: false, alpha: true }}>
           <Scene />
         </Canvas>
+
+        {/* Dimmed Background */}
         <div className="fullscreen bg-[rgba(0,0,0,0.6)]" />
+
+        {/* Animated Text */}
         <div className="fullscreen bg-text">
           <div>
             <div>
