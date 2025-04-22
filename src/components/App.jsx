@@ -122,11 +122,23 @@ function App() {
   return (
     <>
       {/* Background */}
-      <div className="fullscreen">
+      <div className="fullscreen background">
         <Canvas className="fullscreen" gl={{ antialias: false, alpha: true }}>
           <Scene />
         </Canvas>
-        <div className="fullscreen bg-[rgba(0,0,0,0.4)]"></div>
+        <div className="fullscreen bg-[rgba(0,0,0,0.6)]" />
+        <div className="fullscreen bg-text">
+          <div>
+            <div>
+              <span>Ahmed</span>
+              <span>Ahmed</span>
+            </div>
+            <div>
+              <span>Wageh</span>
+              <span>Wageh</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Interface */}

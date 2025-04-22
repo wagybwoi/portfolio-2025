@@ -69,13 +69,13 @@ const Experiments = () => {
             autoPlay
             loop
             muted
-            className="w-full h-full"
+            className="w-full h-full object-cover"
           />
         ) : experiments[experimentIndex]?.image ? (
           <img
             src={experiments[experimentIndex]?.image}
             alt=""
-            className="w-full h-full"
+            className="w-full h-full object-cover"
           />
         ) : (
           <div className="relative w-full h-full flex justify-center items-center text-3xl">
