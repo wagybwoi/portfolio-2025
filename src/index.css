@@ -32,6 +32,8 @@
   --color-cyan: #99e3e2;
   --color-magenta: #f728e4;
   --color-yellow: #fab044;
+
+  --breakpoint-xs: 32rem;
 }
 
 :root {
@@ -214,6 +216,7 @@ body {
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 250px;
   gap: 1rem;
+  overflow: hidden;
 
   @media (width >= 48rem) {
     grid-template-columns: 200px 1fr;
@@ -288,8 +291,6 @@ body {
 
 .window {
   position: absolute;
-  top: 0;
-  left: 0;
   z-index: 10;
   border-radius: 5px;
   padding: 7px;
@@ -304,7 +305,13 @@ body {
   text-transform: uppercase;
   border: 5px solid var(--primary-window-color);
 
-  @media (width >= 40rem) {
+  @media (width < 48rem) {
+    width: 100%;
+    top: 0 !important;
+    left: 0 !important;
+  }
+
+  @media (width >= 48rem) {
     width: auto;
   }
 
@@ -380,19 +387,19 @@ body {
     & .button {
       min-width: 132px;
       margin: auto;
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-transform: uppercase;
-      font-size: 1.25rem;
       line-height: 80%;
-      padding: 0.5rem 2rem;
+      padding: 0.5rem 0rem;
       border-radius: 5px;
       border: 4px solid var(--secondary-window-color);
       cursor: pointer;
 
-      @media (width >= 48rem) {
+      @media (width >= 32rem) {
         border-width: 5px;
-        font-size: 1.75rem;
-        padding: 0.5rem 2rem;
+        padding: 0.5rem 0rem;
       }
     }
   }

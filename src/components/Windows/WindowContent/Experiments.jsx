@@ -33,11 +33,11 @@ const Experiments = () => {
   const [experimentIndex, setExperimentIndex] = useState(0);
 
   return (
-    <div className="p-3 flex flex-col gap-4 text-xl md:text-3xl max-w-[351px] md:max-w-none">
-      <div className="flex justify-center items-center md:mx-6">
-        <label className="mr-2">Sketch:</label>
+    <div className="p-3 flex flex-col gap-4 text-xl xs:text-3xl xs:max-w-[520px] md:max-w-none mx-auto">
+      <div className="flex justify-center items-center xs:mx-6">
+        <label className="mr-2">Experiment:</label>
         <Menu>
-          <MenuButton className="flex items-center justify-between border-[4px] rounded-[5px] px-2 w-[245px] md:w-[300px] cursor-pointer bg-blue data-[open]:border-b-0 data-[open]:rounded-b-none data-[open]:pb-[4px]">
+          <MenuButton className="flex items-center justify-between border-[4px] rounded-[5px] px-2 w-[245px] xs:w-[300px] cursor-pointer bg-blue data-[open]:border-b-0 data-[open]:rounded-b-none data-[open]:pb-[4px]">
             <>
               {experiments[experimentIndex]?.name || "Choose a sketch..."}
               <div className="text-8xl rotate-180 -translate-y-6 leading-0">
@@ -47,14 +47,14 @@ const Experiments = () => {
           </MenuButton>
           <MenuItems
             anchor="bottom"
-            className="bg-blue relative border-x-[4px] border-b-[4px] rounded-b-[5px] border-white w-[245px] md:w-[300px] z-11"
+            className="bg-blue relative border-x-[4px] border-b-[4px] rounded-b-[5px] border-white w-[245px] xs:w-[300px] z-11"
           >
             {experiments.map((sketch, index) => (
               <MenuItem
                 key={`sketch-${index}`}
                 as="button"
                 onClick={() => setExperimentIndex(index)}
-                className="bg-blue text-white data-[focus]:bg-white data-[focus]:text-blue w-full px-2 text-left cursor-pointer text-xl md:text-3xl"
+                className="bg-blue text-white data-[focus]:bg-white data-[focus]:text-blue w-full px-2 text-left cursor-pointer text-xl xs:text-3xl"
               >
                 {sketch.name}
               </MenuItem>

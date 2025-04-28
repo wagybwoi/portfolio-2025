@@ -6,14 +6,17 @@ import CloseButtonIcon from "./CloseButtonIcon";
 const Window = ({
   children,
   ChildComponent = null,
-  pos,
+  initialPos,
   title,
   theme = "black",
   inverted = false,
   removeWindow,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [position, setPosition] = useState({ x: pos?.x || 0, y: pos?.y || 0 });
+  const [position, setPosition] = useState({
+    x: 0,
+    y: 0,
+  });
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const windowRef = useRef(null);
@@ -118,7 +121,12 @@ const Window = ({
   return (
     <animated.div
       className={`window theme-${theme}${inverted ? " inverted" : ""}`}
-      style={{ ...move, scaleY: scale.y }}
+      style={{
+        ...move,
+        scaleY: scale.y,
+        top: initialPos?.y,
+        left: initialPos?.x,
+      }}
       ref={windowRef}
     >
       <div

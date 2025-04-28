@@ -11,27 +11,15 @@ import experimentsIcon from "../images/icons/experiments.png";
 import contactIcon from "../images/icons/contact.png";
 
 const windowData = {
-  Welcome: {
-    title: "Welcome",
-    WindowContent: WindowTypes.Welcome,
-    props: {
-      theme: "black",
-      inverted: false,
-      pos: {
-        x: 800,
-        y: 450,
-      },
-    },
-  },
   About: {
     title: "About Me",
     WindowContent: WindowTypes.Welcome,
     props: {
       theme: "black",
       inverted: false,
-      pos: {
-        x: 800,
-        y: 450,
+      initialPos: {
+        x: "50%",
+        y: "50%",
       },
     },
   },
@@ -41,9 +29,9 @@ const windowData = {
     props: {
       theme: "blue",
       inverted: false,
-      pos: {
-        x: 400,
-        y: 200,
+      initialPos: {
+        x: "40%",
+        y: "20%",
       },
     },
   },
@@ -53,9 +41,9 @@ const windowData = {
     props: {
       theme: "red",
       inverted: false,
-      pos: {
-        x: 400,
-        y: 200,
+      initialPos: {
+        x: "15%",
+        y: "15%",
       },
     },
   },
@@ -65,9 +53,9 @@ const windowData = {
     props: {
       theme: "yellow",
       inverted: true,
-      pos: {
-        x: 100,
-        y: 100,
+      initialPos: {
+        x: "20%",
+        y: "60%",
       },
     },
   },

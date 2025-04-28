@@ -6,7 +6,7 @@ import githubIcon from "../../../images/icons/github.png";
 
 const Socials = () => {
   return (
-    <div className="px-4 py-6 md:p-6 text-5xl font-bold max-w-[351px] md:max-w-[475px]">
+    <div className="px-4 py-6 xs:p-6 text-5xl font-bold max-w-[351px] mx-auto xs:max-w-none">
       <ul className="flex justify-center items-center gap-10 [&>li]:flex [&>li]:justify-center [&>li]:items-center [&>li]:hover:text-black [&>li]:hover:underline">
         <li>
           <a
