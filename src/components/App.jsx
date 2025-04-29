@@ -17,10 +17,7 @@ const windowData = {
     props: {
       theme: "black",
       inverted: false,
-      initialPos: {
-        x: "50%",
-        y: "50%",
-      },
+      className: "about-me",
     },
   },
   Experiments: {
@@ -29,10 +26,7 @@ const windowData = {
     props: {
       theme: "blue",
       inverted: false,
-      initialPos: {
-        x: "40%",
-        y: "20%",
-      },
+      className: "experiments",
     },
   },
   Socials: {
@@ -41,10 +35,7 @@ const windowData = {
     props: {
       theme: "red",
       inverted: false,
-      initialPos: {
-        x: "15%",
-        y: "15%",
-      },
+      className: "socials",
     },
   },
   Contact: {
@@ -53,10 +44,7 @@ const windowData = {
     props: {
       theme: "yellow",
       inverted: true,
-      initialPos: {
-        x: "20%",
-        y: "60%",
-      },
+      className: "contact",
     },
   },
 };
@@ -117,26 +105,26 @@ function App() {
 
         {/* Dimmed Background */}
         <div className="fullscreen bg-[rgba(0,0,0,0.6)]" />
-
-        {/* Animated Text */}
-        <div className="fullscreen bg-text">
-          <div>
-            <div>
-              <span>Ahmed</span>
-              <span>Ahmed</span>
-            </div>
-            <div>
-              <span>Wageh</span>
-              <span>Wageh</span>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Interface */}
       <main className="fullscreen">
         {/* Desktop Icons */}
         <div className="desktop">
+          {/* Animated Text */}
+          <div className="bg-text">
+            <div>
+              <div>
+                <span>Ahmed</span>
+                <span>Ahmed</span>
+              </div>
+              <div>
+                <span>Wageh</span>
+                <span>Wageh</span>
+              </div>
+            </div>
+          </div>
+
           <div className="desktop-icons-main">
             {mainIcons.map((icon, index) => (
               <button

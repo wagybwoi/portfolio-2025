@@ -5,8 +5,8 @@ import CloseButtonIcon from "./CloseButtonIcon";
 
 const Window = ({
   children,
+  className,
   ChildComponent = null,
-  initialPos,
   title,
   theme = "black",
   inverted = false,
@@ -19,10 +19,37 @@ const Window = ({
   });
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [windowAnchors, setWindowAnchors] = useState({
+    top: 0,
+    left: 0,
+  });
   const windowRef = useRef(null);
 
   useEffect(() => {
     setIsOpen(true);
+
+    if (windowRef.current) {
+      const rect = windowRef.current.getBoundingClientRect();
+      setWindowAnchors({
+        top: rect.top,
+        left: rect.left,
+      });
+    }
+
+    window.addEventListener("resize", () => {
+      windowRef.current.style.transform = "";
+      setPosition({ x: 0, y: 0 });
+      setDragOffset({ x: 0, y: 0 });
+      const rect = windowRef.current.getBoundingClientRect();
+      setWindowAnchors({
+        top: rect.top,
+        left: rect.left,
+      });
+    });
+
+    return () => {
+      window.removeEventListener("resize", () => {});
+    };
   }, []);
 
   const scale = useSpring({
@@ -71,8 +98,8 @@ const Window = ({
     const handleDragMove = (clientX, clientY) => {
       if (isDragging) {
         setPosition({
-          x: clientX - dragOffset.x,
-          y: clientY - dragOffset.y,
+          x: clientX - dragOffset.x - windowAnchors.left,
+          y: clientY - dragOffset.y - windowAnchors.top,
         });
       }
     };
@@ -120,28 +147,33 @@ const Window = ({
 
   return (
     <animated.div
-      className={`window theme-${theme}${inverted ? " inverted" : ""}`}
+      className={`window theme-${theme}${
+        inverted ? " inverted" : ""
+      } ${className}`}
       style={{
         ...move,
-        scaleY: scale.y,
-        top: initialPos?.y,
-        left: initialPos?.x,
       }}
       ref={windowRef}
     >
-      <div
-        className={`inner-bar ${isDragging ? "grabbing" : ""}`}
-        onMouseDown={onMouseDown}
-        onTouchStart={onTouchStart}
+      <animated.div
+        style={{
+          scaleY: scale.y,
+        }}
       >
-        <h2 className="mr-6">{title}</h2>
-        <button className="close-button" onClick={close}>
-          <CloseButtonIcon />
-        </button>
-      </div>
-      <div className="inner-window">
-        {children || <ChildComponent close={close} />}
-      </div>
+        <div
+          className={`inner-bar ${isDragging ? "grabbing" : ""}`}
+          onMouseDown={onMouseDown}
+          onTouchStart={onTouchStart}
+        >
+          <h2 className="mr-6">{title}</h2>
+          <button className="close-button" onClick={close}>
+            <CloseButtonIcon />
+          </button>
+        </div>
+        <div className="inner-window">
+          {children || <ChildComponent close={close} />}
+        </div>
+      </animated.div>
     </animated.div>
   );
 };
