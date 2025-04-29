@@ -74,6 +74,7 @@ const mainIcons = [
 
 function App() {
   const [windows, setWindows] = useState([]);
+  const [maxZIndex, setMaxZIndex] = useState(10);
 
   // Trigger default Welcome window
   // TODO: make sure setTimeout is using the correct state
@@ -93,6 +94,10 @@ function App() {
   // Remove window from state
   const removeWindow = (windowTitle) => {
     setWindows(windows.filter((w) => w.title !== windowTitle));
+  };
+
+  const incrementZIndex = () => {
+    setMaxZIndex(maxZIndex + 1);
   };
 
   return (
@@ -158,6 +163,8 @@ function App() {
             ChildComponent={windowItem.WindowContent}
             {...windowItem.props}
             removeWindow={removeWindow}
+            maxZIndex={maxZIndex}
+            incrementZIndex={incrementZIndex}
           />
         ))}
       </main>

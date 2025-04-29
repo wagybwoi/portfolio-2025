@@ -292,7 +292,7 @@ body {
 
 .window {
   position: absolute;
-  z-index: 10;
+  z-index: 10; /* 10 should be the starting z-index for all windows*/
   top: 0;
   left: 0;
   width: 100%;
@@ -316,23 +316,23 @@ body {
     width: auto;
 
     &.about-me {
-      top: 50vh;
-      left: 50vw;
+      left: 55vw;
+      top: 40vh;
     }
 
     &.experiments {
-      top: 10vh;
       left: 30vw;
+      top: 10vh;
     }
 
     &.socials {
-      top: 15vh;
-      left: 10vw;
+      left: 20vw;
+      top: 20vh;
     }
 
     &.contact {
+      left: 10vw;
       top: 50vh;
-      left: 20vw;
     }
   }
 

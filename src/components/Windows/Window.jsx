@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useSpring, animated, easings } from "@react-spring/web";
 
 import CloseButtonIcon from "./CloseButtonIcon";
@@ -11,6 +11,8 @@ const Window = ({
   theme = "black",
   inverted = false,
   removeWindow,
+  maxZIndex,
+  incrementZIndex,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [position, setPosition] = useState({
@@ -25,8 +27,16 @@ const Window = ({
   });
   const windowRef = useRef(null);
 
+  const moveToFront = useCallback(() => {
+    if (windowRef.current) {
+      windowRef.current.style.zIndex = maxZIndex + 1;
+      incrementZIndex();
+    }
+  }, [maxZIndex, incrementZIndex]);
+
   useEffect(() => {
     setIsOpen(true);
+    moveToFront();
 
     if (windowRef.current) {
       const rect = windowRef.current.getBoundingClientRect();
@@ -54,7 +64,8 @@ const Window = ({
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Keep empty dependency array but disable the lint rule
 
   const scale = useSpring({
     y: isOpen ? 1 : 0,
@@ -143,6 +154,7 @@ const Window = ({
       window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("touchend", onTouchEnd);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDragging, dragOffset]);
 
   const close = () => {
@@ -158,6 +170,9 @@ const Window = ({
         ...move,
       }}
       ref={windowRef}
+      onMouseDown={() => {
+        moveToFront();
+      }}
     >
       <animated.div
         style={{

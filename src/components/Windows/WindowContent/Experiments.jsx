@@ -53,7 +53,7 @@ const Experiments = () => {
           </MenuButton>
           <MenuItems
             anchor="bottom"
-            className="bg-blue relative border-x-[4px] border-[4px] rounded-[5px] border-white w-[245px] xs:w-[300px] z-11 mt-[-4px]"
+            className="bg-blue relative border-x-[4px] border-[4px] rounded-[5px] border-white w-[245px] xs:w-[300px] z-[9999] mt-[-4px]"
           >
             {experiments.map((sketch, index) => (
               <MenuItem
