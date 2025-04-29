@@ -36,19 +36,23 @@ const Window = ({
       });
     }
 
-    window.addEventListener("resize", () => {
-      windowRef.current.style.transform = "";
-      setPosition({ x: 0, y: 0 });
-      setDragOffset({ x: 0, y: 0 });
-      const rect = windowRef.current.getBoundingClientRect();
-      setWindowAnchors({
-        top: rect.top,
-        left: rect.left,
-      });
-    });
+    const handleResize = () => {
+      if (windowRef.current) {
+        windowRef.current.style.removeProperty("transform");
+        setPosition({ x: 0, y: 0 });
+        setDragOffset({ x: 0, y: 0 });
+        const rect = windowRef.current.getBoundingClientRect();
+        setWindowAnchors({
+          top: rect.top,
+          left: rect.left,
+        });
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("resize", () => {});
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
