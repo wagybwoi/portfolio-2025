@@ -6,7 +6,7 @@ import githubIcon from "../../../images/icons/github.png";
 
 const Socials = () => {
   return (
-    <div className="px-4 py-6 xs:p-6 text-5xl font-bold max-w-[351px] mx-auto xs:max-w-none">
+    <div className="p-5 xs:p-6 text-5xl font-bold max-w-[351px] mx-auto xs:max-w-none">
       <ul className="flex justify-center items-center gap-10 [&>li]:flex [&>li]:justify-center [&>li]:items-center [&>li]:hover:text-black [&>li]:hover:underline">
         <li>
           <a
@@ -14,7 +14,11 @@ const Socials = () => {
             rel="noopener noreferrer"
             target="_blank"
           >
-            <img src={githubIcon} alt="Github" className="w-[120px]" />
+            <img
+              src={githubIcon}
+              alt="Github"
+              className="w-[80px] xs:w-[100px]"
+            />
           </a>
         </li>
         <li>
@@ -23,7 +27,11 @@ const Socials = () => {
             rel="noopener noreferrer"
             target="_blank"
           >
-            <img src={instagramIcon} alt="Instagram" className="w-[120px]" />
+            <img
+              src={instagramIcon}
+              alt="Instagram"
+              className="w-[80px] xs:w-[100px]"
+            />
           </a>
         </li>
         <li>
@@ -32,7 +40,11 @@ const Socials = () => {
             rel="noopener noreferrer"
             target="_blank"
           >
-            <img src={linkedinIcon} alt="LinkedIn" className="w-[120px]" />
+            <img
+              src={linkedinIcon}
+              alt="LinkedIn"
+              className="w-[80px] xs:w-[100px]"
+            />
           </a>
         </li>
       </ul>
