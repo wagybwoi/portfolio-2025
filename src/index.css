@@ -51,13 +51,12 @@ html {
 }
 
 body {
-  overflow: hidden;
-}
-
-#root {
   width: 100vw;
   height: 100vh; /* Fallback */
   height: 100dvh; /* Dynamic viewport height - adjusts as mobile UI appears/disappears */
+  max-width: 100vw;
+  max-height: 100dvh;
+  overflow: hidden;
 }
 
 .fullscreen {
