@@ -8,7 +8,7 @@ const Welcome = ({ close }) => {
       </h3>
       <p className="mb-5 xs:mb-7 leading-[100%]">
         I'm a <span className="text-magenta">fullstack developer</span> based in{" "}
-        <span className="text-magenta">Toronto</span>.
+        <span className="text-magenta">Toronto, Canada</span>.
       </p>
       <button className="button uppercase xs:w-[170px]" onClick={close}>
         Cool
