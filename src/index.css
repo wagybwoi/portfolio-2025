@@ -56,13 +56,15 @@ body {
 
 #root {
   width: 100vw;
-  height: 100vh;
+  height: 100vh; /* Fallback */
+  height: 100dvh; /* Dynamic viewport height - adjusts as mobile UI appears/disappears */
 }
 
 .fullscreen {
   position: absolute;
   width: 100vw;
-  height: 100vh;
+  height: 100vh; /* Fallback */
+  height: 100dvh; /* Dynamic viewport height */
   top: 0;
   left: 0;
 }
