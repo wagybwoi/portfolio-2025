@@ -15,7 +15,7 @@ import refractionBlob from "../../videos/refraction-blob.webm";
 import mando from "../../videos/mando.webm";
 
 const experiments = [
-  { name: "Boidlingz", video: boidlingz },
+  { name: "Boidlings", video: boidlingz },
   { name: "Yokai", video: yokai },
   { name: "Extrudes", video: extrudes },
   { name: "Torus", video: torus },
@@ -33,40 +33,39 @@ const Experiments = () => {
   const [experimentIndex, setExperimentIndex] = useState(0);
 
   return (
-    <div className="p-3 flex flex-col text-xl xs:text-3xl xs:max-w-[520px] md:max-w-none mx-auto">
-      <div className="flex justify-center items-center mx-5 mb-3">
-        <label className="mr-2">Select:</label>
-        <Menu as="div" className="w-full">
-          <MenuButton className="flex items-center justify-between border-[4px] rounded-[5px] pl-2 xs:w-[300px] cursor-pointer bg-blue w-full">
-            {({ active }) => (
-              <>
-                {experiments[experimentIndex]?.name || "Choose a sketch..."}
-                <div
-                  className={`block text-2xl xs:text-4xl -translate-0.75 mx-2 ${
-                    active ? "rotate-180 translate-y-0.75" : ""
-                  }`}
-                >
-                  v
-                </div>
-              </>
-            )}
-          </MenuButton>
-          <MenuItems
-            anchor="bottom"
-            className="bg-blue relative border-x-[4px] border-[4px] rounded-[5px] border-white w-[245px] xs:w-[300px] z-[9999] mt-[-4px]"
-          >
-            {experiments.map((sketch, index) => (
-              <MenuItem
-                key={`sketch-${index}`}
-                as="button"
-                onClick={() => setExperimentIndex(index)}
-                className="bg-blue text-white data-[focus]:bg-white data-[focus]:text-blue w-full px-2 text-left cursor-pointer text-xl xs:text-3xl"
-              >
-                {sketch.name}
-              </MenuItem>
-            ))}
-          </MenuItems>
-        </Menu>
+    <div className="p-3 flex flex-col text-xl xs:text-3xl xs:w-[450px] max-w-[450px] mx-auto">
+      <div className="flex justify-center items-center mb-3">
+        <div className="w-full flex items-center justify-center mx-auto">
+          <div className="flex items-center justify-between border-[4px] rounded-[5px] pl-2 select-none bg-blue w-full mr-3 text-overflow-ellipsis">
+            {experiments[experimentIndex].name}
+          </div>
+          <div className="flex items-center justify-between gap-2">
+            <button
+              className="border-[4px] rounded-[5px] pl-2 pr-3 font-bold cursor-pointer bg-blue hover:bg-white hover:text-blue hover:border-white"
+              onClick={() => {
+                setExperimentIndex(
+                  experimentIndex - 1 < 0
+                    ? experiments.length - 1
+                    : experimentIndex - 1
+                );
+              }}
+            >
+              &lt;
+            </button>
+            <button
+              className="border-[4px] rounded-[5px] pl-3 pr-2 font-bold cursor-pointer bg-blue hover:bg-white hover:text-blue hover:border-white"
+              onClick={() => {
+                setExperimentIndex(
+                  experimentIndex + 1 < experiments.length
+                    ? experimentIndex + 1
+                    : 0
+                );
+              }}
+            >
+              &gt;
+            </button>
+          </div>
+        </div>
       </div>
       <div className="w-full h-0 pb-[100%] border-[4px] border-white relative">
         {experiments[experimentIndex]?.video ? (
@@ -75,6 +74,7 @@ const Experiments = () => {
             autoPlay
             loop
             muted
+            playsInline
             className="w-full h-full object-cover absolute inset-0"
           />
         ) : experiments[experimentIndex]?.image ? (
