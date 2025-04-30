@@ -41,7 +41,7 @@ const Experiments = () => {
           </div>
           <div className="flex items-center justify-between gap-2">
             <button
-              className="border-[4px] rounded-[5px] pl-2 pr-3 font-bold cursor-pointer bg-blue hover:bg-white hover:text-blue hover:border-white"
+              className="border-[4px] rounded-[5px] pl-2 pr-3 font-bold cursor-pointer bg-blue xs:hover:bg-white xs:hover:text-blue xs:hover:border-white "
               onClick={() => {
                 setExperimentIndex(
                   experimentIndex - 1 < 0
@@ -53,7 +53,7 @@ const Experiments = () => {
               &lt;
             </button>
             <button
-              className="border-[4px] rounded-[5px] pl-3 pr-2 font-bold cursor-pointer bg-blue hover:bg-white hover:text-blue hover:border-white"
+              className="border-[4px] rounded-[5px] pl-3 pr-2 font-bold cursor-pointer bg-blue xs:hover:bg-white xs:hover:text-blue xs:hover:border-white "
               onClick={() => {
                 setExperimentIndex(
                   experimentIndex + 1 < experiments.length
