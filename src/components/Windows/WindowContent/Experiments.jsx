@@ -42,8 +42,8 @@ const Experiments = () => {
               <>
                 {experiments[experimentIndex]?.name || "Choose a sketch..."}
                 <div
-                  className={`block text-2xl xs:text-4xl -translate-0.5 mx-2 ${
-                    active ? "rotate-180 translate-y-0.5" : ""
+                  className={`block text-2xl xs:text-4xl -translate-0.75 mx-2 ${
+                    active ? "rotate-180 translate-y-0.75" : ""
                   }`}
                 >
                   v

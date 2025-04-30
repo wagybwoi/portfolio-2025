@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 
 import Scene from "./Three/Scene";
@@ -78,11 +78,11 @@ function App() {
 
   // Trigger default Welcome window
   // TODO: make sure setTimeout is using the correct state
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setWindows([...windows, windowData.Experiments]);
-  //   }, 1000);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setWindows([...windows, windowData.About]);
+    }, 1000);
+  }, []);
 
   const addWindow = (window) => {
     // Check if window is already in state
