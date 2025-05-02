@@ -15,10 +15,6 @@ const Window = ({
   incrementZIndex,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [position, setPosition] = useState({
-    x: 0,
-    y: 0,
-  });
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [windowAnchors, setWindowAnchors] = useState({
@@ -26,6 +22,7 @@ const Window = ({
     left: 0,
   });
   const windowRef = useRef(null);
+  const scaleRef = useRef(null);
 
   const moveToFront = useCallback(() => {
     if (windowRef.current) {
@@ -49,7 +46,7 @@ const Window = ({
     const handleResize = () => {
       if (windowRef.current) {
         windowRef.current.style.removeProperty("transform");
-        setPosition({ x: 0, y: 0 });
+        updatePosition({ x: 0, y: 0 });
         setDragOffset({ x: 0, y: 0 });
         const rect = windowRef.current.getBoundingClientRect();
         setWindowAnchors({
@@ -81,10 +78,14 @@ const Window = ({
     },
   });
 
-  const move = useSpring({
-    transform: `translate(${position.x}px, ${position.y}px)`,
-    config: { tension: 500 },
-  });
+  const updatePosition = useCallback(
+    ({ x, y }) => {
+      if (windowRef.current) {
+        windowRef.current.style.transform = `translate(${x}px, ${y}px)`;
+      }
+    },
+    [windowRef]
+  );
 
   const handleDragStart = (clientX, clientY) => {
     if (windowRef.current) {
@@ -112,7 +113,7 @@ const Window = ({
   useEffect(() => {
     const handleDragMove = (clientX, clientY) => {
       if (isDragging) {
-        setPosition({
+        updatePosition({
           x: clientX - dragOffset.x - windowAnchors.left,
           y: clientY - dragOffset.y - windowAnchors.top,
         });
@@ -162,23 +163,16 @@ const Window = ({
   };
 
   return (
-    <animated.div
+    <div
       className={`window theme-${theme}${
         inverted ? " inverted" : ""
       } ${className}`}
-      style={{
-        ...move,
-      }}
       ref={windowRef}
       onMouseDown={() => {
         moveToFront();
       }}
     >
-      <animated.div
-        style={{
-          scaleY: scale.y,
-        }}
-      >
+      <animated.div ref={scaleRef} style={{ scaleY: scale.y }}>
         <div
           className={`inner-bar ${isDragging ? "grabbing" : ""}`}
           onMouseDown={onMouseDown}
@@ -193,7 +187,7 @@ const Window = ({
           {children || <ChildComponent close={close} />}
         </div>
       </animated.div>
-    </animated.div>
+    </div>
   );
 };
 
