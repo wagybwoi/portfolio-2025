@@ -81,48 +81,61 @@ const Window = ({
   const updatePosition = useCallback(
     ({ x, y }) => {
       if (windowRef.current) {
-        windowRef.current.style.transform = `translate(${x}px, ${y}px)`;
+        windowRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
       }
     },
     [windowRef]
   );
 
-  const handleDragStart = (clientX, clientY) => {
-    if (windowRef.current) {
-      const rect = windowRef.current.getBoundingClientRect();
-      setDragOffset({
-        x: clientX - rect.left,
-        y: clientY - rect.top,
-      });
-      setIsDragging(true);
-      document.querySelector("body").style.cursor = "grabbing";
-    }
-  };
+  const handleDragStart = useCallback(
+    (clientX, clientY) => {
+      if (windowRef.current) {
+        const rect = windowRef.current.getBoundingClientRect();
+        setDragOffset({
+          x: clientX - rect.left,
+          y: clientY - rect.top,
+        });
+        setIsDragging(true);
+        document.body.style.cursor = "grabbing";
+        moveToFront();
+      }
+    },
+    [moveToFront]
+  );
 
   // Mouse event handlers
-  const onMouseDown = (e) => {
-    handleDragStart(e.clientX, e.clientY);
-  };
+  const onMouseDown = useCallback(
+    (e) => {
+      handleDragStart(e.clientX, e.clientY);
+    },
+    [handleDragStart]
+  );
 
   // Touch event handlers
-  const onTouchStart = (e) => {
-    const touch = e.touches[0];
-    handleDragStart(touch.clientX, touch.clientY);
-  };
+  const onTouchStart = useCallback(
+    (e) => {
+      const touch = e.touches[0];
+      handleDragStart(touch.clientX, touch.clientY);
+    },
+    [handleDragStart]
+  );
 
   useEffect(() => {
     const handleDragMove = (clientX, clientY) => {
       if (isDragging) {
-        updatePosition({
-          x: clientX - dragOffset.x - windowAnchors.left,
-          y: clientY - dragOffset.y - windowAnchors.top,
+        // Use requestAnimationFrame for smoother updates
+        requestAnimationFrame(() => {
+          updatePosition({
+            x: clientX - dragOffset.x - windowAnchors.left,
+            y: clientY - dragOffset.y - windowAnchors.top,
+          });
         });
       }
     };
 
     const handleDragEnd = () => {
       setIsDragging(false);
-      document.querySelector("body").style.removeProperty("cursor");
+      document.body.style.removeProperty("cursor");
     };
 
     const onMouseMove = (e) => {
@@ -143,9 +156,9 @@ const Window = ({
     };
 
     if (isDragging) {
-      window.addEventListener("mousemove", onMouseMove);
+      window.addEventListener("mousemove", onMouseMove, { passive: true });
       window.addEventListener("mouseup", onMouseUp);
-      window.addEventListener("touchmove", onTouchMove, { passive: false });
+      window.addEventListener("touchmove", onTouchMove, { passive: true });
       window.addEventListener("touchend", onTouchEnd);
     }
 
@@ -155,8 +168,13 @@ const Window = ({
       window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("touchend", onTouchEnd);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDragging, dragOffset]);
+  }, [
+    isDragging,
+    dragOffset,
+    windowAnchors.left,
+    windowAnchors.top,
+    updatePosition,
+  ]);
 
   const close = () => {
     setIsOpen(false);
@@ -168,9 +186,7 @@ const Window = ({
         inverted ? " inverted" : ""
       } ${className}`}
       ref={windowRef}
-      onMouseDown={() => {
-        moveToFront();
-      }}
+      onClick={moveToFront}
     >
       <animated.div ref={scaleRef} style={{ scaleY: scale.y }}>
         <div
