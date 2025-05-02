@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 
 import boidlingz from "../../videos/boidlingz.webm";
@@ -31,6 +31,26 @@ const experiments = [
 
 const Experiments = () => {
   const [experimentIndex, setExperimentIndex] = useState(0);
+  const [loadedVideos, setLoadedVideos] = useState({});
+
+  // Preload all videos when component mounts
+  useEffect(() => {
+    experiments.forEach((experiment, index) => {
+      if (experiment.video) {
+        const videoElement = document.createElement("video");
+        videoElement.src = experiment.video;
+        videoElement.preload = "auto";
+        videoElement.muted = true;
+        videoElement.onloadeddata = () => {
+          setLoadedVideos((prev) => ({
+            ...prev,
+            [index]: true,
+          }));
+        };
+        videoElement.load();
+      }
+    });
+  }, []);
 
   return (
     <div className="p-3 flex flex-col text-xl xs:text-3xl xs:w-[450px] max-w-[450px] mx-auto">
@@ -69,14 +89,21 @@ const Experiments = () => {
       </div>
       <div className="w-full h-0 pb-[100%] border-[4px] border-white relative">
         {experiments[experimentIndex]?.video ? (
-          <video
-            src={experiments[experimentIndex]?.video}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover absolute inset-0"
-          />
+          <>
+            {!loadedVideos[experimentIndex] && (
+              <div className="absolute inset-0 flex items-center justify-center bg-blue bg-opacity-50">
+                <span className="text-white">Loading...</span>
+              </div>
+            )}
+            <video
+              src={experiments[experimentIndex]?.video}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover absolute inset-0"
+            />
+          </>
         ) : experiments[experimentIndex]?.image ? (
           <img
             src={experiments[experimentIndex]?.image}
