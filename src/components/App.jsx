@@ -76,20 +76,23 @@ function App() {
   const [windows, setWindows] = useState([]);
   const [maxZIndex, setMaxZIndex] = useState(10);
 
+  const addWindow = (window) => {
+    // Use functional update to avoid stale closure issues
+    setWindows((prevWindows) => {
+      // Check if window is already in state
+      if (!prevWindows.some((w) => w.title === window.title)) {
+        return [...prevWindows, window];
+      }
+      return prevWindows;
+    });
+  };
+
   // Trigger default Welcome window
-  // TODO: make sure setTimeout is using the correct state
   useEffect(() => {
     setTimeout(() => {
-      setWindows([...windows, windowData.About]);
+      addWindow(windowData["About"]);
     }, 1000);
   }, []);
-
-  const addWindow = (window) => {
-    // Check if window is already in state
-    if (!windows.some((w) => w.title === window.title)) {
-      setWindows([...windows, window]);
-    }
-  };
 
   // Remove window from state
   const removeWindow = (windowTitle) => {
