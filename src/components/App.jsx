@@ -91,7 +91,7 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       addWindow(windowData["About"]);
-    }, 1000);
+    }, 2000);
   }, []);
 
   // Remove window from state
